@@ -50,24 +50,6 @@ class ProductProvider extends Component {
     return product;
   };
 
-  addToCart = (id) => {
-    let tempProducts = [...this.state.products];
-    const index = tempProducts.indexOf(this.getItem(id));
-    const product = tempProducts[index];
-    product.inCart = true;
-    product.count = 1;
-    const price = product.price;
-    product.total = price;
-    this.setState(
-      () => {
-        return { products: tempProducts, cart: [...this.state.cart, product] };
-      },
-      () => {
-        this.addTotals();
-      }
-    );
-  };
-
   removeItem = (id) => {
     let tempProducts = [...this.state.products];
     let tempCart = [...this.state.cart];
@@ -149,9 +131,6 @@ class ProductProvider extends Component {
       <ProductContext.Provider
         value={{
           ...this.state,
-          addToCart: this.addToCart,
-          increment: this.increment,
-          decrement: this.decrement,
           removeItem: this.removeItem,
           setCount: this.setCount,
           clearCart: this.clearCart,
